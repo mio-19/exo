@@ -141,12 +141,12 @@ model_cards = {
   "qwen-2.5-72b": { "layers": 80, "repo": { "MLXDynamicShardInferenceEngine": "mlx-community/Qwen2.5-72B-Instruct-4bit", }, },
   "qwen-2.5-math-72b": { "layers": 80, "repo": { "MLXDynamicShardInferenceEngine": "mlx-community/Qwen2.5-Math-72B-Instruct-4bit", }, },
   ### qwq
-  "qwq-preview-32b-4bit": { "layers": 64, "repo": { "MLXDynamicShardInferenceEngine": "mlx-community/QwQ-32B-4bit", }, },
-  "qwq-preview-32b-3bit": { "layers": 64, "repo": { "MLXDynamicShardInferenceEngine": "mlx-community/QwQ-32B-3bit", }, },
-  "qwq-preview-32b-6bit": { "layers": 64, "repo": { "MLXDynamicShardInferenceEngine": "mlx-community/QwQ-32B-6bit", }, },
-  "qwq-preview-32b-8bit": { "layers": 64, "repo": { "MLXDynamicShardInferenceEngine": "mlx-community/QwQ-32B-8bit", }, },
-  "qwq-preview-32b-bf16": { "layers": 64, "repo": { "MLXDynamicShardInferenceEngine": "mlx-community/QwQ-32B-bf16", }, },
-  "qwq-cubed-4bit": { "layers": 68, "repo": { "MLXDynamicShardInferenceEngine": "mlx-community/Qwen2.5-QwQ-35B-Eureka-Cubed-abliterated-uncensored-4bit", }, },
+  "qwq-32b-4bit": { "layers": 64, "repo": { "MLXDynamicShardInferenceEngine": "mlx-community/QwQ-32B-4bit", }, },
+  "qwq-32b-3bit": { "layers": 64, "repo": { "MLXDynamicShardInferenceEngine": "mlx-community/QwQ-32B-3bit", }, },
+  "qwq-32b-6bit": { "layers": 64, "repo": { "MLXDynamicShardInferenceEngine": "mlx-community/QwQ-32B-6bit", }, },
+  "qwq-32b-8bit": { "layers": 64, "repo": { "MLXDynamicShardInferenceEngine": "mlx-community/QwQ-32B-8bit", }, },
+  "qwq-32b-bf16": { "layers": 64, "repo": { "MLXDynamicShardInferenceEngine": "mlx-community/QwQ-32B-bf16", }, },
+  "qwq-35b-abliterated-4bit": { "layers": 68, "repo": { "MLXDynamicShardInferenceEngine": "mlx-community/Qwen2.5-QwQ-35B-Eureka-Cubed-abliterated-uncensored-4bit", }, },
   ### nemotron
   "nemotron-70b": { "layers": 80, "repo": { "MLXDynamicShardInferenceEngine": "mlx-community/nvidia_Llama-3.1-Nemotron-70B-Instruct-HF_4bit", }, },
   "nemotron-70b-bf16": { "layers": 80, "repo": { "MLXDynamicShardInferenceEngine": "mlx-community/Llama-3.1-Nemotron-70B-Instruct-HF-bf16", }, },
