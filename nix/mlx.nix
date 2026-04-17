@@ -5,7 +5,7 @@
 , fetchzip
 , cmake
 , nlohmann_json
-, apple-sdk_26
+, apple-sdk_15
 , metal-toolchain
 , runCommand
 , fmt
@@ -18,6 +18,11 @@ assert stdenv.isDarwin;
 
 let
   python = python313Packages.python;
+  # Compile MLX against the latest toolchain, but target a Metal language level
+  # that still runs on macOS 15.x. This avoids emitting Metal 4.0 kernels such
+  # as fence_update, which fail to load on Sequoia.
+  compatibleMetalVersion = "320";
+  compatibleMetalStandardFlag = "-std=metal3.2";
 
   # Static dependencies included directly during compilation
   gguf-tools = fetchFromGitHub {
@@ -54,8 +59,9 @@ let
 
     patches = [
       (replaceVars ./darwin-build-fixes.patch {
-        sdkVersion = apple-sdk_26.version;
-        metalVersion = metal-toolchain.metalVersion;
+        sdkVersion = apple-sdk_15.version;
+        metalVersion = compatibleMetalVersion;
+        metalStandardFlag = compatibleMetalStandardFlag;
       })
     ];
 
@@ -87,11 +93,11 @@ let
         (lib.cmakeBool "MLX_BUILD_CPU" true)
         (lib.cmakeBool "MLX_BUILD_METAL" true)
         (lib.cmakeOptionType "filepath" "FETCHCONTENT_SOURCE_DIR_METAL_CPP" "${metal_cpp}")
-        (lib.cmakeOptionType "string" "CMAKE_OSX_DEPLOYMENT_TARGET" "${apple-sdk_26.version}")
-        (lib.cmakeOptionType "filepath" "CMAKE_OSX_SYSROOT" "${apple-sdk_26.passthru.sdkroot}")
+        (lib.cmakeOptionType "string" "CMAKE_OSX_DEPLOYMENT_TARGET" "${apple-sdk_15.version}")
+        (lib.cmakeOptionType "filepath" "CMAKE_OSX_SYSROOT" "${apple-sdk_15.passthru.sdkroot}")
       ];
-      SDKROOT = apple-sdk_26.passthru.sdkroot;
-      MACOSX_DEPLOYMENT_TARGET = apple-sdk_26.version;
+      SDKROOT = apple-sdk_15.passthru.sdkroot;
+      MACOSX_DEPLOYMENT_TARGET = apple-sdk_15.version;
     };
 
     build-system = [
@@ -115,7 +121,7 @@ let
       gguf-tools
       python313Packages.nanobind
       python313Packages.pybind11
-      apple-sdk_26
+      apple-sdk_15
     ];
 
     # Tests require Metal GPU access which isn't available in the Nix sandbox.

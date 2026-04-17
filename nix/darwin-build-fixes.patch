@@ -38,7 +38,7 @@ index 13db804a..5b385132 100644
      OUTPUT ${MTLLIB_BUILD_TARGET}
      COMMAND
 -      xcrun -sdk macosx metal
-+      metal -fmodules-cache-path=${CMAKE_BINARY_DIR}/metal-cache
++      metal -fmodules-cache-path=${CMAKE_BINARY_DIR}/metal-cache @metalStandardFlag@
        "$<LIST:TRANSFORM,${MTLLIB_INCLUDE_DIRS},PREPEND,-I>"
        ${MTLLIB_COMPILE_OPTIONS} ${MTLLIB_SOURCES} -o ${MTLLIB_BUILD_TARGET}
      DEPENDS ${MTLLIB_DEPS} ${MTLLIB_SOURCES}
@@ -51,7 +51,7 @@ index 262b0495..5c7446ad 100644
    endif()
    add_custom_command(
 -    COMMAND xcrun -sdk macosx metal ${METAL_FLAGS} -c ${SRCFILE}
-+    COMMAND metal -fmodules-cache-path=${CMAKE_BINARY_DIR}/metal-cache ${METAL_FLAGS} -c ${SRCFILE}
++    COMMAND metal -fmodules-cache-path=${CMAKE_BINARY_DIR}/metal-cache @metalStandardFlag@ ${METAL_FLAGS} -c ${SRCFILE}
              -I${PROJECT_SOURCE_DIR} -o ${TARGET}.air
      DEPENDS ${SRCFILE} ${DEPS} ${BASE_HEADERS}
      OUTPUT ${TARGET}.air
@@ -73,7 +73,7 @@ index bb55ed3a..94ea7dd7 100644
 
  # Use the metal compiler to get a list of headers (with depth)
 -CCC="xcrun -sdk macosx metal -x metal"
-+CCC="metal -x metal -fmodules-cache-path=${OUTPUT_DIR}/metal-cache"
++CCC="metal -x metal -fmodules-cache-path=${OUTPUT_DIR}/metal-cache @metalStandardFlag@"
  HDRS=$( $CCC -I"$SRC_DIR" -I"$JIT_INCLUDES" -DMLX_METAL_JIT -E -P -CC -C -H "$INPUT_FILE" $CFLAGS -w 2>&1 1>/dev/null )
 
  # Remove any included system frameworks (for MetalPerformancePrimitive headers)

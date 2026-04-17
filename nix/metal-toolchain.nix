@@ -19,7 +19,7 @@ let
            nix nar pack /tmp/metal-export > /tmp/metal-toolchain-17C48.nar
            nix store add --mode flat /tmp/metal-toolchain-17C48.nar
     '';
-    hash = "sha256-ayR5mXN4sZAddwKEG2OszGRF93k9ZFc7H0yi2xbylQw=";
+    hash = "sha256-4GjtNzFw2fA3kwZeFqzQe59aQmJrd6YL7Kqi8RkmH8U=";
   };
 in
 stdenvNoCC.mkDerivation {

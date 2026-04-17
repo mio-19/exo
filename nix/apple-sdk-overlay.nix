@@ -1,4 +1,4 @@
-# Overlay that builds apple-sdk with a custom versions.json (for SDK 26.2).
+# Overlay that builds apple-sdk with a custom versions.json.
 # The upstream nixpkgs package reads versions.json at eval time via a relative
 # path, so we can't override it through callPackage args. Instead, we copy
 # the upstream source and patch the one file.
@@ -12,6 +12,9 @@ let
   '';
 in
 {
+  apple-sdk_15 = final.callPackage (patchedSrc + "/package.nix") {
+    darwinSdkMajorVersion = "15";
+  };
   apple-sdk_26 = final.callPackage (patchedSrc + "/package.nix") {
     darwinSdkMajorVersion = "26";
   };
